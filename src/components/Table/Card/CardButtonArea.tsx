@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   ActionButton,
   ActionButtonArea,
   CardFooterWrapper,
   CardUpperActionButtonWrapper,
-  ToggleButton
-} from './StyledComponent';
-import Image from 'next/image';
-import SVGmodifier from '@/components/SVG_modifier/SVGmodifier';
-import styled from 'styled-components';
+  ToggleButton,
+} from "./StyledComponent";
+import Image from "next/image";
+
+import styled from "styled-components";
 
 const FooterActionButton = styled.div`
   display: flex;
@@ -37,7 +37,7 @@ const CardButtonArea = ({
   cardObject,
   project,
   handleShowActionBtn = () => {},
-  showActionBtn
+  showActionBtn,
 }: any) => {
   const { options, render } = cardObject?.action || {};
   const topActingWrapperRef = React.useRef<HTMLDivElement>(null);
@@ -46,24 +46,31 @@ const CardButtonArea = ({
     // close action button on click outside
     if (showActionBtn) {
       const handleClick = (e: any) => {
-        if (topActingWrapperRef.current && !topActingWrapperRef.current.contains(e.target)) {
+        if (
+          topActingWrapperRef.current &&
+          !topActingWrapperRef.current.contains(e.target)
+        ) {
           handleShowActionBtn(0);
         }
       };
-      document.addEventListener('click', handleClick);
+      document.addEventListener("click", handleClick);
       return () => {
-        document.removeEventListener('click', handleClick);
+        document.removeEventListener("click", handleClick);
       };
     }
   }, [showActionBtn]);
 
   return (
     <>
-      {options && options?.position === 'top' ? (
+      {options && options?.position === "top" ? (
         //top button actions
         <CardUpperActionButtonWrapper ref={topActingWrapperRef}>
           <ToggleButton onClick={() => handleShowActionBtn(project.id)}>
-            <SVGmodifier svg="/assets/icons/verticalDots.svg" width={20} height={20} />
+            {/* <SVGmodifier
+              svg="/assets/icons/verticalDots.svg"
+              width={20}
+              height={20}
+            /> */}
           </ToggleButton>
           {project.id === showActionBtn
             ? cardObject?.action && (
@@ -79,7 +86,7 @@ const CardButtonArea = ({
                   )}
                 </ActionButtonArea>
               )
-            : ''}
+            : ""}
         </CardUpperActionButtonWrapper>
       ) : (
         // bottom button actions

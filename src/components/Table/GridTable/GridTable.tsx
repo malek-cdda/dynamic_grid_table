@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import CardComponent from '../Card/Card';
-import TableComponent from '../Table/Table';
-import Pagination from '../components/Pagination/Pagination';
-import SelectBtn from '../components/SelectArea/Select';
+import React, { useEffect, useState } from "react";
+import CardComponent from "../Card/Card";
+import TableComponent from "../Table/Table";
+import Pagination from "../components/Pagination/Pagination";
+import SelectBtn from "../components/SelectArea/Select";
 import {
   GridContainer,
   GridTableAllButton,
@@ -13,11 +13,10 @@ import {
   GridTableViewButton,
   GridTableViewWrapperArea,
   GridTableWrapper,
-  GridTableWrapperArea
-} from './styledComponents';
+  GridTableWrapperArea,
+} from "./styledComponents";
 
-import Image from 'next/image';
-import SVGmodifier from '@/components/SVG_modifier/SVGmodifier';
+import Image from "next/image";
 
 const GridTable = ({
   data = [],
@@ -37,7 +36,7 @@ const GridTable = ({
   isGridList = false,
   renderHeader,
   isPagination = false,
-  getSortingData
+  getSortingData,
 }: // isGrid = false,
 any) => {
   const [isGrid, setIsGrid] = React.useState(false); // logic for grid and list view
@@ -45,7 +44,7 @@ any) => {
   let columns = dataAccessor;
   if (dataAccessor?.length >= 0) {
     columns = dataAccessor;
-  } else if (typeof dataAccessor === 'object') {
+  } else if (typeof dataAccessor === "object") {
     cardObject = dataAccessor?.card;
     columns = dataAccessor?.table;
   }
@@ -67,17 +66,15 @@ any) => {
         {isGridList && (
           <GridTableViewWrapperArea>
             <GridTableViewButton
-              $activeColor={!isGrid ? 'activeColorValue' : ''}
-              onClick={() => setIsGrid(false)}
-            >
-              <SVGmodifier svg="/assets/icons/list.svg" width={23} height={23} />
+              $activeColor={!isGrid ? "activeColorValue" : ""}
+              onClick={() => setIsGrid(false)}>
+              {/* <SVGmodifier svg="/assets/icons/list.svg" width={23} height={23} /> */}
               <span> List View</span>
             </GridTableViewButton>
             <GridTableViewButton
-              $activeColor={isGrid ? 'activeColorValue' : ''}
-              onClick={() => setIsGrid(true)}
-            >
-              <SVGmodifier svg="/assets/icons/grid.svg" width={23} height={23} stroke="white" />
+              $activeColor={isGrid ? "activeColorValue" : ""}
+              onClick={() => setIsGrid(true)}>
+              {/* <SVGmodifier svg="/assets/icons/grid.svg" width={23} height={23} stroke="white" /> */}
               <span>Grid View</span>
             </GridTableViewButton>
           </GridTableViewWrapperArea>
@@ -114,17 +111,19 @@ any) => {
       {isPagination && (
         <div
           style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            padding: '10px ',
-            borderBottomLeftRadius: '8px',
-            borderBottomRightRadius: '8px'
-          }}
-        >
-          {' '}
+            display: "flex",
+            justifyContent: "space-between",
+            padding: "10px ",
+            borderBottomLeftRadius: "8px",
+            borderBottomRightRadius: "8px",
+          }}>
+          {" "}
           <div>
             {/* select value for showing data in row table  */}
-            <SelectBtn handleRowShowValue={handleRowShowValue} limits={limits} />
+            <SelectBtn
+              handleRowShowValue={handleRowShowValue}
+              limits={limits}
+            />
           </div>
           <div>
             {/* pagination component */}

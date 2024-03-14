@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const TableComponentWrapper = styled.div`
   overflow-x: auto;
@@ -9,33 +9,49 @@ export const Table = styled.table`
   border-collapse: collapse;
   width: 100%;
   padding: 5px;
-  background: ${(props: any) => props.theme?.themePresets?.table?.background || 'transparent'};
-  color: ${(props: any) => props.theme?.themePresets?.table?.text || '#fff'};
+  background: ${(props: any) =>
+    props.theme?.themePresets?.table?.background || "transparent"};
+  color: ${(props: any) => props.theme?.themePresets?.table?.text || "#fff"};
 `;
 // thead code here
 export const TableHeader = styled.thead`
-  border-top: ${(props: any) => props.theme?.themePresets?.table?.border || '#eee'} 1px solid;
-  color: ${(props: any) => props.theme?.themePresets?.table?.headerText || 'black'};
-  background: ${(props: any) => props.theme?.themePresets?.table?.headerBg || 'transparent'};
+  border-top: ${(props: any) =>
+      props.theme?.themePresets?.table?.border || "#eee"}
+    1px solid;
+  color: ${(props: any) =>
+    props.theme?.themePresets?.table?.headerText || "white"};
+  background: ${(props: any) =>
+    props.theme?.themePresets?.table?.headerBg || "transparent"};
 `;
 // table row code here
 export const TableRow = styled.tr<any>`
-  border-bottom: ${(props: any) => props.theme?.themePresets?.table?.border || '#eee'} 1px solid;
-  cursor: ${(props: any) => (props.$isOnclickRow == 'click' ? 'pointer' : 'default')};
+  border-bottom: ${(props: any) =>
+      props.theme?.themePresets?.table?.border || "#eee"}
+    1px solid;
+  cursor: ${(props: any) =>
+    props.$isOnclickRow == "click" ? "pointer" : "default"};
 `;
 // table head code here
 export const TableHead = styled.th`
-  text-align: left;
+  text-align: right;
+  #check {
+    background: red;
+  }
   padding: 8px;
+  &.checkboxes {
+    width: 30px;
+  }
 `;
 // table data code here
 export const TableData = styled.td`
   padding: 0 8px;
   height: 50px;
-  color: ${(props: any) => props.theme?.themePresets?.table?.celltext || ''};
+  color: ${(props: any) => props.theme?.themePresets?.table?.celltext || ""};
+  text-align: right;
 `;
 export const TableBody = styled.tbody`
-  background: ${(props: any) => props.theme?.themePresets?.table?.background || ''};
+  background: ${(props: any) =>
+    props.theme?.themePresets?.table?.background || ""};
 `;
 
 // ?! table custom checkbox code here

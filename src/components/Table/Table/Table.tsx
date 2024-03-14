@@ -1,5 +1,5 @@
-'use client';
-import React, { useEffect, useState } from 'react';
+"use client";
+import React, { useEffect, useState } from "react";
 
 import {
   Table,
@@ -14,16 +14,16 @@ import {
   TableHeaderFirst,
   TableHeaderLast,
   TableHeaderNone,
-  TableRow
-} from './StyleComponent';
-import SVGmodifier from '@/components/SVG_modifier/SVGmodifier';
+  TableRow,
+} from "./StyleComponent";
+// import SVGmodifier from '@/components/SVG_modifier/SVGmodifier';
 const TableComponent = ({
   columns = [],
   records = [],
   onToggleItem = () => {},
   showSelectBox = false,
   tableHeaderShow = true,
-  defaultRowRender
+  defaultRowRender,
 }: any) => {
   const [toggleItem, setToggleItem] = useState<any>([]);
   const [tableAllData, setTableAllData] = useState<any>(records);
@@ -32,7 +32,7 @@ const TableComponent = ({
   }, [records]);
   // select box function code here for all data
   const handleAllDataSelectedRecords = (e: any) => {
-    if (e === 'all') {
+    if (e === "all") {
       if (toggleItem.length === records.length) {
         setToggleItem([]);
       } else {
@@ -51,21 +51,21 @@ const TableComponent = ({
   }, [onToggleItem, toggleItem]);
   const initialSortConfig = columns.reduce((acc: any, column: any) => {
     if (column?.sortable) {
-      acc[column?.accessor] = { key: column?.accessor, direction: 'asc' };
+      acc[column?.accessor] = { key: column?.accessor, direction: "asc" };
     }
     return acc;
   }, {});
   const [sortConfig, setSortConfig] = useState(initialSortConfig);
   const handleSort = (key: string) => {
-    const direction = sortConfig[key].direction === 'asc' ? 'desc' : 'asc';
+    const direction = sortConfig[key].direction === "asc" ? "desc" : "asc";
     const newSortConfig = { ...sortConfig, [key]: { key, direction } };
 
     const resultData =
       tableAllData?.length &&
       [...tableAllData]?.sort((a: any, b: any) => {
-        if (direction === 'asc') {
+        if (direction === "asc") {
           return a[key] > b[key] ? 1 : -1;
-        } else if (direction === 'desc') {
+        } else if (direction === "desc") {
           return a[key] < b[key] ? 1 : -1;
         }
         return 0;
@@ -73,8 +73,9 @@ const TableComponent = ({
     setTableAllData(resultData);
     setSortConfig(newSortConfig);
   };
+  console.log(columns, "columns");
   return (
-    <TableComponentWrapper style={{ overflow: 'auto' }}>
+    <TableComponentWrapper style={{ overflow: "auto" }}>
       {tableAllData?.length && columns?.length > 0 ? (
         <Table>
           {/*  table header area  */}
@@ -82,17 +83,19 @@ const TableComponent = ({
             <TableHeader>
               <TableRow>
                 {showSelectBox && (
-                  <TableHead>
-                    {' '}
-                    {/* header select box code here */}
+                  <TableHead className="checkboxes" id="check">
+                    {" "}
                     <div
-                      style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-                    >
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "right",
+                      }}>
                       <TableCheckbox
                         type="checkbox"
                         checked={toggleItem.length === records.length}
                         onChange={() => {
-                          handleAllDataSelectedRecords('all');
+                          handleAllDataSelectedRecords("all");
                         }}
                       />
                     </div>
@@ -104,36 +107,47 @@ const TableComponent = ({
                     <TableHead key={index}>
                       <div
                         style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '8px'
-                        }}
-                      >
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent:
+                            (header?.options && header?.options?.position) ||
+                            "center",
+                          textAlign: "right",
+                          width: "100%",
+                          gap: "8px",
+                        }}>
                         {header?.title}
                         {/* sorting for their key code here  */}
                         {header?.sortable && (
                           <span
                             style={{
-                              cursor: header?.sortable ? 'pointer' : ''
-                            }}
-                          >
-                            {sortConfig[header.accessor]?.key === header.accessor && (
+                              cursor: header?.sortable ? "pointer" : "",
+                            }}>
+                            {sortConfig[header.accessor]?.key ===
+                              header.accessor && (
                               <span>
-                                {sortConfig[header.accessor]?.direction === 'asc' ? (
-                                  <span onClick={() => handleSort(header?.accessor)}>
-                                    <SVGmodifier
+                                {sortConfig[header.accessor]?.direction ===
+                                "asc" ? (
+                                  <span
+                                    onClick={() =>
+                                      handleSort(header?.accessor)
+                                    }>
+                                    {/* <SVGmodifier
                                       svg={'assets/icons/arrow_up.svg'}
                                       height={20}
                                       width={20}
-                                    />
+                                    /> */}
                                   </span>
                                 ) : (
-                                  <span onClick={() => handleSort(header?.accessor)}>
-                                    <SVGmodifier
+                                  <span
+                                    onClick={() =>
+                                      handleSort(header?.accessor)
+                                    }>
+                                    {/* <SVGmodifier
                                       svg={'assets/icons/arrow_down.svg'}
                                       height={20}
                                       width={20}
-                                    />
+                                    /> */}
                                   </span>
                                 )}
                               </span>
@@ -156,17 +170,21 @@ const TableComponent = ({
                   onClick={() => {
                     defaultRowRender && defaultRowRender(data);
                   }}
-                  $isOnclickRow={defaultRowRender ? 'click' : ''}
-                >
+                  $isOnclickRow={defaultRowRender ? "click" : ""}>
                   {tableHeaderShow && showSelectBox && (
                     <TableData className="checkbox_center">
                       {/*  select box code here */}
                       <div
-                        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-                      >
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}>
                         <TableCheckbox
                           type="checkbox"
-                          checked={toggleItem.some((item: any) => item.id === data.id)}
+                          checked={toggleItem.some(
+                            (item: any) => item.id === data.id
+                          )}
                           onChange={() => handleAllDataSelectedRecords(data)}
                         />
                       </div>
@@ -175,9 +193,21 @@ const TableComponent = ({
                   {columns.map((header: any, index: any) => (
                     <TableData key={index}>
                       {/* is data exist then it show in ui other you need to render it  */}
-                      {header?.render
-                        ? header?.render(data)
-                        : getDynamicValue(data, header?.accessor)}
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent:
+                            (header?.options && header?.options?.position) ||
+                            "center",
+                          textAlign: "right",
+                          width: "100%",
+                          gap: "8px",
+                        }}>
+                        {header?.render
+                          ? header?.render(data)
+                          : getDynamicValue(data, header?.accessor)}
+                      </div>
                     </TableData>
                   ))}
                 </TableRow>
@@ -202,9 +232,10 @@ const TableComponent = ({
 export default TableComponent;
 
 const getDynamicValue = (obj: any, keys: string) => {
-  const keysArray = keys.split('.');
+  const keysArray = keys.split(".");
   return keysArray.reduce(
-    (value, key) => (value && value[key] !== undefined ? value[key] : undefined),
+    (value, key) =>
+      value && value[key] !== undefined ? value[key] : undefined,
     obj
   );
 };
