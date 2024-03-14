@@ -10,8 +10,8 @@ export const Table = styled.table`
   width: 100%;
   padding: 5px;
   background: ${(props: any) =>
-    props.theme?.themePresets?.table?.background || "transparent"};
-  color: ${(props: any) => props.theme?.themePresets?.table?.text || "#fff"};
+    props.theme?.themePresets?.table?.background || "white"};
+  color: ${(props: any) => props.theme?.themePresets?.table?.text || "black"};
 `;
 // thead code here
 export const TableHeader = styled.thead`
@@ -19,7 +19,7 @@ export const TableHeader = styled.thead`
       props.theme?.themePresets?.table?.border || "#eee"}
     1px solid;
   color: ${(props: any) =>
-    props.theme?.themePresets?.table?.headerText || "white"};
+    props.theme?.themePresets?.table?.headerText || "black"};
   background: ${(props: any) =>
     props.theme?.themePresets?.table?.headerBg || "transparent"};
 `;
@@ -30,6 +30,12 @@ export const TableRow = styled.tr<any>`
     1px solid;
   cursor: ${(props: any) =>
     props.$isOnclickRow == "click" ? "pointer" : "default"};
+  &.selected {
+    background: #c7e9f759;
+  }
+  &.odd {
+    background: red;
+  }
 `;
 // table head code here
 export const TableHead = styled.th`
@@ -47,7 +53,7 @@ export const TableData = styled.td`
   padding: 0 8px;
   height: 50px;
   color: ${(props: any) => props.theme?.themePresets?.table?.celltext || ""};
-  text-align: right;
+  // text-align: right;
 `;
 export const TableBody = styled.tbody`
   background: ${(props: any) =>

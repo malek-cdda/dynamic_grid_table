@@ -113,15 +113,19 @@ const TableComponent = ({
                             (header?.options && header?.options?.position) ||
                             "center",
                           textAlign: "right",
-                          width: "100%",
+                          width:
+                            (header?.options && header?.options?.width) ||
+                            "100%",
                           gap: "8px",
                         }}>
                         {header?.title}
                         {/* sorting for their key code here  */}
-                        {header?.sortable && (
+                        {header?.options?.sortable && (
                           <span
                             style={{
-                              cursor: header?.sortable ? "pointer" : "",
+                              cursor: header?.options?.sortable
+                                ? "pointer"
+                                : "",
                             }}>
                             {sortConfig[header.accessor]?.key ===
                               header.accessor && (
@@ -167,6 +171,13 @@ const TableComponent = ({
               return (
                 <TableRow
                   key={index}
+                  // selected row backgroundColor
+                  className={`${
+                    toggleItem.some((item: any) => item.id === data.id)
+                      ? "selected"
+                      : ""
+                  }  `}
+                  // click on row for callback function
                   onClick={() => {
                     defaultRowRender && defaultRowRender(data);
                   }}
@@ -197,11 +208,15 @@ const TableComponent = ({
                         style={{
                           display: "flex",
                           alignItems: "center",
+                          // overflow: "hidden",
+                          // overflowX: "auto",
                           justifyContent:
                             (header?.options && header?.options?.position) ||
                             "center",
                           textAlign: "right",
-                          width: "100%",
+                          width:
+                            (header?.options && header?.options?.width) ||
+                            "100%",
                           gap: "8px",
                         }}>
                         {header?.render

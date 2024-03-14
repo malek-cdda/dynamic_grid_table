@@ -77,6 +77,7 @@ const Projects = () => {
         sortable: true,
         options: {
           position: "end",
+          width: "100%",
         },
         render: (data: any) => (
           <div
@@ -178,7 +179,7 @@ const Projects = () => {
   const handleRowShowValue = (e: any) => {
     setLimits(e);
   };
-
+  //   const handle
   const renderHeader = () => {
     return (
       <></>
